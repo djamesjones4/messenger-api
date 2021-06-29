@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  content: MyString
+  to_user: one
+  from_user: one
+  read: false
+
+two:
+  content: MyString
+  to_user: two
+  from_user: two
+  read: false

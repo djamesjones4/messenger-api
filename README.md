@@ -21,18 +21,21 @@
 <hr/>
 
 ### Conversations
-A conversation consists of a primary key and a participants column. Conversations consist of multiple users. The `New Conversation` endpoint should be hit after a user has selected the list of users they would like to add to a conversation. Conversations are continuous between participants.
+A conversation consists of a primary key and a participants column. Conversations consist of multiple users. The `New Conversation` endpoint should be hit after a user has selected the list of users they would like to add to a conversation, upon sending of the first message to the conversation participants. Conversations are continuous between participants.
 
 <strong>New conversation:</strong> `POST /conversations`
   - params:
   {
-    <strong>participants:</strong> integer array [int, int, ...]
+    <strong>participants:</strong> string (i.e. "1,4,6")
   } <br>
 
+**NOTE: because sqlite3 does not accept array types a string must be passed and handled by the controller. 
 <hr/>
+
 
 ### Messages
 Messages are individual comments made within a conversation.<br>
+Messages rely on conversations. If a conversation does not already exist, the `new conversation` endpoint should be hit first to return a `conversation_id` to provide to the `new message` endpoint.
 
 Messages consist of the message's:<br>
 

@@ -10,23 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_30_151341) do
+ActiveRecord::Schema.define(version: 2021_06_30_155044) do
 
   create_table "conversations", force: :cascade do |t|
-    t.integer "participants", null: false
+    t.integer "participants"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "messages", force: :cascade do |t|
-    t.string "content", limit: 160, null: false
-    t.integer "to_user_id", null: false
+    t.string "content"
+    t.integer "conversation_id", null: false
     t.integer "from_user_id", null: false
-    t.boolean "read", default: false
+    t.boolean "read"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["from_user_id"], name: "index_messages_on_from_user_id"
-    t.index ["to_user_id"], name: "index_messages_on_to_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -38,6 +38,6 @@ ActiveRecord::Schema.define(version: 2021_06_30_151341) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users", column: "from_user_id"
-  add_foreign_key "messages", "users", column: "to_user_id"
 end

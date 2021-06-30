@@ -3,7 +3,8 @@ class MessagesController < ApplicationController
 
   # GET /messages
   def index
-    @messages = Message.all
+    # limit query to 100 records and within the last 30 days
+    @messages = Message.where('created_at >= ?',30.days.ago).limit(100)
 
     render json: @messages
   end
@@ -46,6 +47,6 @@ class MessagesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def message_params
-      params.require(:message).permit(:content, :to_user_id, :from_user_id, :read)
+      params.permit(:content, :to_user_id, :from_user_id, :read)
     end
 end

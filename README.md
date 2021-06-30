@@ -1,24 +1,18 @@
-# README
+# Messenger-API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## End Points
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Users
+  New User: `Post /users` <br>
+    - params:<br>
+    {<br>
+        <strong>id:</strong> integer,<br>
+        <strong>first_name:</strong> string,<br>
+        <strong>last_name:</strong> string,<br>
+        <strong>email:</strong> string,<br>
+        <strong>username:</strong> string,<br>
+    }<br>
+  <strong>User Index:</strong> `Get /users` <br>
+  <strong>Get individual user:</strong> `GET /users/:id`<br>
+  <strong>Edit user:</strong> `PATCH/PUT /users/:id`<br>
+  <strong>Destroy user:</strong> `DELETE /user/:id`<br>

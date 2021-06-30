@@ -23,7 +23,7 @@ class MessagesController < ApplicationController
       render json: @message.errors, status: :unprocessable_entity
     end
   end
-
+  
   # PATCH/PUT /messages/1
   def update
     if @message.update(message_params)

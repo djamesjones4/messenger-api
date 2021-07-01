@@ -15,12 +15,17 @@ class ConversationsController < ApplicationController
 
   # POST /conversations
   def create
-    @conversation = Conversation.new(conversation_params)
-
-    if @conversation.save
-      render json: @conversation, status: :created, location: @conversation
+    #if conversation exists load existing conversation and use existing conversation_id for Message.new params
+    @existing = Conversation.where(participants: conversation_params[:participants])
+    if @existing.length() > 0
+      render json: @existing
     else
-      render json: @conversation.errors, status: :unprocessable_entity
+      @conversation = Conversation.new(conversation_params)
+      if @conversation.save
+        render json: @conversation, status: :created, location: @conversation
+      else
+        render json: @conversation.errors, status: :unprocessable_entity
+      end
     end
   end
 

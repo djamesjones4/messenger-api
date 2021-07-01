@@ -3,7 +3,8 @@ class MessagesController < ApplicationController
 
   # GET /messages
   def index
-    @messages = Message.all
+    # limit query to 100 records and within the last 30 days
+    @messages = Message.where('created_at >= ?',30.days.ago).limit(100)
 
     render json: @messages
   end
@@ -11,6 +12,12 @@ class MessagesController < ApplicationController
   # GET /messages/1
   def show
     render json: @message
+  end
+
+  # Get /by_conversation/
+  def getFromUser
+    @messages = Message.where(conversation_id: message_params[:conversation_id]).where('created_at >= ?',30.days.ago).limit(100)
+    render json: @messages
   end
 
   # POST /messages
@@ -23,7 +30,7 @@ class MessagesController < ApplicationController
       render json: @message.errors, status: :unprocessable_entity
     end
   end
-  
+
   # PATCH/PUT /messages/1
   def update
     if @message.update(message_params)
@@ -41,11 +48,12 @@ class MessagesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_message
-      @message = Message.find(params[:id])
+      puts "in set_message!!!!"
+      # @message = Message.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def message_params
-      params.require(:message).permit(:content, :conversation_id, :from_user_id, :read)
+      params.permit(:content, :conversation_id, :from_user_id, :read)
     end
 end

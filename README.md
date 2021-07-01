@@ -29,7 +29,9 @@ A conversation consists of a primary key and a participants column. Conversation
     <strong>participants:</strong> string (i.e. "1,4,6")
   } <br>
 
-**NOTE: because sqlite3 does not accept array types a string must be passed and handled by the controller. 
+  The response from the `New Conversation` call will return the `conversation_id` to be passed in the `New Message`(POST /messages) request parameters.
+
+**NOTE: because sqlite3 does not accept array types, a string of user IDs (`participants`) must be passed and handled by the controller.
 <hr/>
 
 
@@ -50,6 +52,8 @@ Messages consist of the message's:<br>
     <strong>from_user_id:</strong> integer
   }<br>
 
+<strong>Message Index:</strong> `GET /messages` *Note: limited to last 30 days or 100 messages<br>
 <strong>Get Message by ID:</strong> `GET /messages/:id`<br>
+<strong>Get Messages from sender:</strong> `Get /messages/:from_user_id`<br>
 <strong>Edit Message:</strong> `PATCH/PUT /messages/:id`<br>
 <strong>Destroy Message:</strong> `DELETE /message/:id`<br>

@@ -55,6 +55,6 @@ Messages consist of the message's:<br>
 <strong>Message Index:</strong> `GET /messages` *Note: limited to last 30 days or 100 messages<br>
 <strong>Get Message by ID:</strong> `GET /messages/:id`<br>
 <strong>Get Messages from sender:</strong> `Get /by_conversation/`<br>
-  - params: { conversation_id: integer }
+  - params: { conversation_id: integer }<br>
 <strong>Edit Message:</strong> `PATCH/PUT /messages/:id`<br>
 <strong>Destroy Message:</strong> `DELETE /message/:id`<br>

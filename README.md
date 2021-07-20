@@ -56,5 +56,6 @@ Messages consist of the message's:<br>
 <strong>Get Message by ID:</strong> `GET /messages/:id`<br>
 <strong>Get Messages from sender:</strong> `Get /by_conversation/`<br>
   - params: { conversation_id: integer }<br>
+
 <strong>Edit Message:</strong> `PATCH/PUT /messages/:id`<br>
 <strong>Destroy Message:</strong> `DELETE /message/:id`<br>
